@@ -6,150 +6,61 @@
 <title>Anti Grief Unit | LSPD Division</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: #0a0e1a;
-  --dark: #0d1220;
-  --panel: #111827;
-  --border: #1e293b;
-  --blue: #1d4ed8;
-  --blue-bright: #3b82f6;
-  --cyan: #06b6d4;
-  --yellow: #fbbf24;
-  --red: #ef4444;
-  --green: #22c55e;
-  --text: #e2e8f0;
-  --muted: #64748b;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { background:var(--navy); color:var(--text); font-family:'Rajdhani',sans-serif; min-height:100vh; overflow-x:hidden; }
-body::before {
-  content:''; position:fixed; inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
-  pointer-events:none; z-index:999;
-}
-
-/* --- NAV --- */
-nav {
-  position:sticky; top:0; z-index:100;
-  background:rgba(10,14,26,0.95); backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 40px; height:60px;
-}
-.nav-logo { font-family:'Oswald'; font-size:22px; font-weight:700; letter-spacing:3px; color:#fff; }
-.nav-logo span { color:var(--blue-bright); }
-.nav-links { display:flex; gap:0; align-items:center; }
-.nav-links a {
-  font-family:'Share Tech Mono'; font-size:12px; letter-spacing:2px;
-  color:var(--muted); text-decoration:none; text-transform:uppercase;
-  padding:0 18px; height:60px; display:flex; align-items:center;
-  border-bottom:2px solid transparent; transition:all 0.2s;
-}
-.nav-links a:hover { color:#fff; border-bottom-color:var(--blue-bright); }
-
-.duty-btn {
-  font-family:'Share Tech Mono'; font-size:11px; letter-spacing:2px;
-  text-transform:uppercase; padding:0 16px; height:36px;
-  border:1px solid rgba(34,197,94,0.4); background:rgba(34,197,94,0.08);
-  color:var(--green); cursor:pointer; display:flex; align-items:center;
-  gap:8px; transition:all 0.2s; margin-left:12px; border-radius:2px;
-  white-space:nowrap;
-}
-.duty-btn:hover { background:rgba(34,197,94,0.15); border-color:var(--green); }
-.duty-btn.on-duty {
-  background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.4);
-  color:var(--red);
-}
-.duty-btn.on-duty:hover { background:rgba(239,68,68,0.18); border-color:var(--red); }
-.duty-indicator {
-  width:7px; height:7px; border-radius:50%;
-  background:var(--green); flex-shrink:0; box-shadow:0 0 6px var(--green);
-}
-.duty-btn.on-duty .duty-indicator {
-  background:var(--red); box-shadow:0 0 6px var(--red);
-  animation:blink 1.2s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* --- MODAL --- */
-.modal-overlay {
-  display:none; position:fixed; inset:0; z-index:1000;
-  background:rgba(0,0,0,0.75); backdrop-filter:blur(4px);
-  align-items:center; justify-content:center;
-}
-.modal-overlay.active { display:flex; }
-.modal {
-  background:var(--panel); border:1px solid var(--border);
-  border-top:3px solid var(--blue-bright);
-  padding:36px; width:100%; max-width:420px;
-  position:relative; animation:modalIn 0.2s ease;
-}
-@keyframes modalIn { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
-.modal-close {
-  position:absolute; top:14px; right:16px;
-  background:none; border:none; color:var(--muted);
-  font-size:20px; cursor:pointer; transition:color 0.2s;
-}
-.modal-close:hover { color:#fff; }
-.modal-eyebrow {
-  font-family:'Share Tech Mono'; font-size:10px; letter-spacing:3px;
-  color:var(--cyan); text-transform:uppercase; margin-bottom:8px;
-}
-.modal h3 {
-  font-family:'Oswald'; font-size:24px; font-weight:700;
-  color:#fff; letter-spacing:2px; margin-bottom:6px;
-}
-.modal p { font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6; }
-.modal-input-label {
-  font-family:'Share Tech Mono'; font-size:11px; letter-spacing:2px;
-  color:var(--muted); text-transform:uppercase; display:block; margin-bottom:8px;
-}
-.modal-input {
-  width:100%; background:#0a0e1a; border:1px solid var(--border);
-  border-radius:2px; color:#fff; font-family:'Share Tech Mono';
-  font-size:18px; letter-spacing:4px; padding:14px 16px;
-  outline:none; transition:border-color 0.2s; text-align:center;
-}
-.modal-input:focus { border-color:var(--blue-bright); }
-.modal-input::placeholder { color:#334155; letter-spacing:2px; font-size:14px; }
-.modal-submit {
-  width:100%; margin-top:16px;
-  background:var(--blue); color:#fff;
-  font-family:'Oswald'; font-size:16px; font-weight:700;
-  letter-spacing:3px; padding:14px; border:none;
-  cursor:pointer; text-transform:uppercase; transition:all 0.2s;
-  display:flex; align-items:center; justify-content:center; gap:10px;
-}
-.modal-submit:hover { background:var(--blue-bright); }
-.modal-submit:disabled { opacity:0.5; cursor:not-allowed; }
-.modal-submit.sign-out {
-  background:rgba(239,68,68,0.12); color:var(--red);
-  border:1px solid rgba(239,68,68,0.3);
-}
-.modal-submit.sign-out:hover { background:rgba(239,68,68,0.22); }
-.modal-status {
-  margin-top:14px; padding:10px 14px; border-radius:2px;
-  font-family:'Share Tech Mono'; font-size:12px; letter-spacing:1px;
-  display:none;
-}
-.modal-status.success { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); color:var(--green); display:block; }
-.modal-status.error { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); color:var(--red); display:block; }
-
-/* --- ON DUTY BAR --- */
-.on-duty-bar {
-  display:none; background:rgba(34,197,94,0.06);
-  border-bottom:1px solid rgba(34,197,94,0.2);
-  padding:8px 40px; align-items:center; gap:14px;
-}
-.on-duty-bar.active { display:flex; }
-.on-duty-bar .pulse { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 1.2s ease-in-out infinite; flex-shrink:0; }
-.on-duty-bar p { font-family:'Share Tech Mono'; font-size:11px; color:rgba(34,197,94,0.8); letter-spacing:1px; }
-.on-duty-bar .badge-display { font-weight:700; color:var(--green); }
-
-/* --- HERO, SECTIONS, FOOTER & OTHER STYLES --- */
-/* ... [Include all your original styles exactly as in your provided code] ... */
-
+  /* ==== YOUR ORIGINAL STYLES ==== */
+  :root {
+    --navy: #0a0e1a;
+    --dark: #0d1220;
+    --panel: #111827;
+    --border: #1e293b;
+    --blue: #1d4ed8;
+    --blue-bright: #3b82f6;
+    --cyan: #06b6d4;
+    --yellow: #fbbf24;
+    --red: #ef4444;
+    --green: #22c55e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background:var(--navy); color:var(--text); font-family:'Rajdhani',sans-serif; min-height:100vh; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px); pointer-events:none; z-index:999; }
+  /* ==== NAVIGATION ==== */
+  nav { position:sticky; top:0; z-index:100; background:rgba(10,14,26,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:60px; }
+  .nav-logo { font-family:'Oswald'; font-size:22px; font-weight:700; letter-spacing:3px; color:#fff; }
+  .nav-logo span { color:var(--blue-bright); }
+  .nav-links { display:flex; gap:0; align-items:center; }
+  .nav-links a { font-family:'Share Tech Mono'; font-size:12px; letter-spacing:2px; color:var(--muted); text-decoration:none; text-transform:uppercase; padding:0 18px; height:60px; display:flex; align-items:center; border-bottom:2px solid transparent; transition:all 0.2s; }
+  .nav-links a:hover { color:#fff; border-bottom-color:var(--blue-bright); }
+  .duty-btn { font-family:'Share Tech Mono'; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:0 16px; height:36px; border:1px solid rgba(34,197,94,0.4); background:rgba(34,197,94,0.08); color:var(--green); cursor:pointer; display:flex; align-items:center; gap:8px; transition:all 0.2s; margin-left:12px; border-radius:2px; white-space:nowrap; }
+  .duty-btn:hover { background:rgba(34,197,94,0.15); border-color:var(--green); }
+  .duty-btn.on-duty { background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.4); color:var(--red); }
+  .duty-btn.on-duty:hover { background:rgba(239,68,68,0.18); border-color:var(--red); }
+  .duty-indicator { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; box-shadow:0 0 6px var(--green); }
+  .duty-btn.on-duty .duty-indicator { background:var(--red); box-shadow:0 0 6px var(--red); animation:blink 1.2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  /* ==== MODAL ==== */
+  .modal-overlay { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); align-items:center; justify-content:center; }
+  .modal-overlay.active { display:flex; }
+  .modal { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--blue-bright); padding:36px; width:100%; max-width:420px; position:relative; animation:modalIn 0.2s ease; }
+  @keyframes modalIn { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+  .modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; transition:color 0.2s; }
+  .modal-close:hover { color:#fff; }
+  .modal-eyebrow { font-family:'Share Tech Mono'; font-size:10px; letter-spacing:3px; color:var(--cyan); text-transform:uppercase; margin-bottom:8px; }
+  .modal h3 { font-family:'Oswald'; font-size:24px; font-weight:700; color:#fff; letter-spacing:2px; margin-bottom:6px; }
+  .modal p { font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6; }
+  .modal-input-label { font-family:'Share Tech Mono'; font-size:11px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:8px; }
+  .modal-input { width:100%; background:#0a0e1a; border:1px solid var(--border); border-radius:2px; color:#fff; font-family:'Share Tech Mono'; font-size:18px; letter-spacing:4px; padding:14px 16px; outline:none; transition:border-color 0.2s; text-align:center; }
+  .modal-input:focus { border-color:var(--blue-bright); }
+  .modal-input::placeholder { color:#334155; letter-spacing:2px; font-size:14px; }
+  .modal-submit { width:100%; margin-top:16px; background:var(--blue); color:#fff; font-family:'Oswald'; font-size:16px; font-weight:700; letter-spacing:3px; padding:14px; border:none; cursor:pointer; text-transform:uppercase; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .modal-submit:hover { background:var(--blue-bright); }
+  .modal-submit.sign-out { background:rgba(239,68,68,0.12); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
+  .modal-submit.sign-out:hover { background:rgba(239,68,68,0.22); }
+  .modal-status { margin-top:14px; padding:10px 14px; border-radius:2px; font-family:'Share Tech Mono'; font-size:12px; letter-spacing:1px; display:none; }
+  .modal-status.success { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); color:var(--green); display:block; }
+  .modal-status.error { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); color:var(--red); display:block; }
+  /* ==== REST OF YOUR ORIGINAL CSS OMITTED FOR BREVITY ==== */
 </style>
 </head>
 <body>
@@ -165,7 +76,7 @@ nav {
       <p>Enter your badge number to sign on duty. Dispatch will be notified immediately.</p>
       <label class="modal-input-label" for="badgeInput">Officer Badge Number</label>
       <input class="modal-input" type="text" id="badgeInput" placeholder="e.g. 1042" maxlength="10" autocomplete="off">
-      <button class="modal-submit" id="signInBtn">🛡️ SIGN ON DUTY</button>
+      <button class="modal-submit" id="signInBtn" onclick="signIn()">🛡️ SIGN ON DUTY</button>
       <div class="modal-status" id="signInStatus"></div>
     </div>
 
@@ -173,7 +84,7 @@ nav {
       <div class="modal-eyebrow">LSPD · DISPATCH SYSTEM</div>
       <h3>END DUTY</h3>
       <p id="signOutMsg">Sign off and notify dispatch you are going off duty.</p>
-      <button class="modal-submit sign-out" id="signOutBtn">🔴 SIGN OFF DUTY</button>
+      <button class="modal-submit sign-out" id="signOutBtn" onclick="signOut()">🔴 SIGN OFF DUTY</button>
       <div class="modal-status" id="signOutStatus"></div>
     </div>
   </div>
@@ -187,7 +98,7 @@ nav {
     <a href="#mission">Mission</a>
     <a href="#ranks">Ranks</a>
     <a href="#rules">Code of Conduct</a>
-    <button class="duty-btn" id="dutyToggleBtn">
+    <button class="duty-btn" id="dutyToggleBtn" onclick="openModal()">
       <div class="duty-indicator" id="dutyIndicator"></div>
       <span id="dutyBtnLabel">SIGN ON DUTY</span>
     </button>
@@ -199,96 +110,72 @@ nav {
   <p>🚨 OFFICER <span class="badge-display" id="activeBadgeDisplay"></span> IS CURRENTLY ON DUTY — PATROL ACTIVE</p>
 </div>
 
-<!-- HERO, ABOUT, FEATURES, RANKS, RULES, RECRUITMENT, JOIN, FOOTER -->
-<!-- [Include all your original HTML content exactly as provided above] -->
+<!-- ==== HERO, ABOUT, FEATURES, RANKS, RULES, RECRUITMENT, FOOTER ==== -->
+<!-- Keep all your original sections here exactly as in your original code -->
+<!-- OMITTED FOR BREVITY BUT COPY ALL ORIGINAL HTML CONTENT FROM YOUR INDEX.HTML -->
 
+<!-- ==== JS FOR SIGN-IN/SIGN-OUT ==== -->
 <script>
-// ----------------- DUTY MODAL LOGIC -----------------
-const dutyModal = document.getElementById('dutyModal');
-const dutyToggleBtn = document.getElementById('dutyToggleBtn');
-const dutyIndicator = document.getElementById('dutyIndicator');
-const dutyBtnLabel = document.getElementById('dutyBtnLabel');
-const modalSignIn = document.getElementById('modalSignIn');
-const modalSignOut = document.getElementById('modalSignOut');
-const signInBtn = document.getElementById('signInBtn');
-const signOutBtn = document.getElementById('signOutBtn');
-const onDutyBar = document.getElementById('onDutyBar');
-const activeBadgeDisplay = document.getElementById('activeBadgeDisplay');
+  let modalSignIn = document.getElementById('modalSignIn');
+  let modalSignOut = document.getElementById('modalSignOut');
+  let dutyToggleBtn = document.getElementById('dutyToggleBtn');
+  let dutyBtnLabel = document.getElementById('dutyBtnLabel');
+  let dutyIndicator = document.getElementById('dutyIndicator');
+  let badgeNumber = '';
+  let onDuty = false;
 
-function openModal() { dutyModal.classList.add('active'); updateModalView(); }
-function closeModal() { dutyModal.classList.remove('active'); }
+  function openModal() { document.getElementById('dutyModal').classList.add('active'); }
+  function closeModal() { document.getElementById('dutyModal').classList.remove('active'); }
 
-function updateModalView() {
-  const onDuty = localStorage.getItem('onDuty') === 'true';
-  if(onDuty) {
-    modalSignIn.style.display = 'none';
-    modalSignOut.style.display = 'block';
-  } else {
-    modalSignIn.style.display = 'block';
-    modalSignOut.style.display = 'none';
-  }
-}
-
-// --------------- SIGN IN / OUT -----------------
-signInBtn.addEventListener('click', async () => {
-  const badge = document.getElementById('badgeInput').value;
-  if(!badge) return alert('Enter your badge number');
-
-  try {
-    const res = await fetch('/api/signin', { // Replace with your Vercel/GitHub API endpoint
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body:JSON.stringify({ badge })
-    });
-    const data = await res.json();
-    if(data.success){
-      localStorage.setItem('onDuty','true');
-      localStorage.setItem('badge',badge);
-      dutyBtnLabel.textContent = 'ON DUTY';
-      dutyIndicator.style.backgroundColor = 'var(--red)';
-      onDutyBar.classList.add('active');
-      activeBadgeDisplay.textContent = badge;
-      closeModal();
-    } else {
-      alert(data.message || 'Sign in failed');
+  function signIn() {
+    let input = document.getElementById('badgeInput').value.trim();
+    if (!input) {
+      document.getElementById('signInStatus').className = 'modal-status error';
+      document.getElementById('signInStatus').innerText = "Enter a valid badge number.";
+      return;
     }
-  } catch(e){ console.error(e); alert('Error signing in'); }
-});
-
-signOutBtn.addEventListener('click', async () => {
-  const badge = localStorage.getItem('badge');
-  try {
-    const res = await fetch('/api/signout', { // Replace with your Vercel/GitHub API endpoint
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body:JSON.stringify({ badge })
+    badgeNumber = input;
+    fetch('YOUR_DISCORD_WEBHOOK_URL_HERE', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: `Officer ${badgeNumber} signed on duty.` })
+    }).then(res => {
+      document.getElementById('signInStatus').className = 'modal-status success';
+      document.getElementById('signInStatus').innerText = 'Signed on duty!';
+      modalSignIn.style.display = 'none';
+      modalSignOut.style.display = 'block';
+      dutyToggleBtn.classList.add('on-duty');
+      dutyBtnLabel.innerText = 'ON DUTY';
+      dutyIndicator.style.background = 'var(--red)';
+      onDuty = true;
+      document.getElementById('onDutyBar').classList.add('active');
+      document.getElementById('activeBadgeDisplay').innerText = badgeNumber;
+    }).catch(err => {
+      document.getElementById('signInStatus').className = 'modal-status error';
+      document.getElementById('signInStatus').innerText = 'Error connecting to dispatch.';
     });
-    const data = await res.json();
-    if(data.success){
-      localStorage.removeItem('onDuty');
-      localStorage.removeItem('badge');
-      dutyBtnLabel.textContent = 'SIGN ON DUTY';
-      dutyIndicator.style.backgroundColor = 'var(--green)';
-      onDutyBar.classList.remove('active');
-      closeModal();
-    } else {
-      alert(data.message || 'Sign out failed');
-    }
-  } catch(e){ console.error(e); alert('Error signing out'); }
-});
-
-// Initialize on load
-window.addEventListener('load', () => {
-  if(localStorage.getItem('onDuty')==='true'){
-    dutyBtnLabel.textContent = 'ON DUTY';
-    dutyIndicator.style.backgroundColor = 'var(--red)';
-    onDutyBar.classList.add('active');
-    activeBadgeDisplay.textContent = localStorage.getItem('badge');
-  } else {
-    dutyBtnLabel.textContent = 'SIGN ON DUTY';
-    dutyIndicator.style.backgroundColor = 'var(--green)';
   }
-});
+
+  function signOut() {
+    fetch('YOUR_DISCORD_WEBHOOK_URL_HERE', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: `Officer ${badgeNumber} signed off duty.` })
+    }).then(res => {
+      modalSignOut.style.display = 'none';
+      modalSignIn.style.display = 'block';
+      dutyToggleBtn.classList.remove('on-duty');
+      dutyBtnLabel.innerText = 'SIGN ON DUTY';
+      dutyIndicator.style.background = 'var(--green)';
+      document.getElementById('onDutyBar').classList.remove('active');
+      badgeNumber = '';
+      onDuty = false;
+    }).catch(err => {
+      document.getElementById('signOutStatus').className = 'modal-status error';
+      document.getElementById('signOutStatus').innerText = 'Error notifying dispatch.';
+    });
+  }
 </script>
+
 </body>
 </html>
