@@ -236,7 +236,7 @@
     let input=document.getElementById('badgeInput').value.trim();
     if(!input){document.getElementById('signInStatus').className='modal-status error';document.getElementById('signInStatus').innerText="Enter a valid badge number.";return;}
     badgeNumber=input;
-    fetch('YOUR_DISCORD_WEBHOOK_URL_HERE',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed on duty.`})}).then(res=>{
+    fetch('https://discord.com/api/webhooks/1475657960926740574/oQwjQEhJz53vv4iHy81Cpc1tWdIrWsHbAEwLXi2onHt4Je6Z8w4jFhhDcWb1QcA33a8q',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed on duty.`})}).then(res=>{
       document.getElementById('signInStatus').className='modal-status success';
       document.getElementById('signInStatus').innerText='Signed on duty!';
       modalSignIn.style.display='none'; modalSignOut.style.display='block';
@@ -249,7 +249,7 @@
   }
 
   function signOut(){
-    fetch('YOUR_DISCORD_WEBHOOK_URL_HERE',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed off duty.`})}).then(res=>{
+    fetch('https://discord.com/api/webhooks/1475657960926740574/oQwjQEhJz53vv4iHy81Cpc1tWdIrWsHbAEwLXi2onHt4Je6Z8w4jFhhDcWb1QcA33a8q',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed off duty.`})}).then(res=>{
       modalSignOut.style.display='none'; modalSignIn.style.display='block';
       dutyToggleBtn.classList.remove('on-duty'); dutyBtnLabel.innerText='SIGN ON DUTY'; dutyIndicator.style.background='var(--green)';
       badgeNumber=''; onDuty=false;
