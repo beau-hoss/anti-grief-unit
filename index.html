@@ -199,7 +199,7 @@
 
     badgeNumber=input;
 
-    fetch('YOUR_WEBHOOK_URL_HERE',{
+    fetch('https://discord.com/api/webhooks/1471353586960044201/auaaqtBc1W7QnWCqcmqG_UH7YozwRad7XqSSTpiD--2i6XZYNzi_h6jX2qT7JYZfBGlw',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({content:`Officer ${badgeNumber} signed on duty.`})
@@ -219,7 +219,7 @@
   }
 
   function signOut(){
-    fetch('YOUR_WEBHOOK_URL_HERE',{
+    fetch('https://discord.com/api/webhooks/1471353586960044201/auaaqtBc1W7QnWCqcmqG_UH7YozwRad7XqSSTpiD--2i6XZYNzi_h6jX2qT7JYZfBGlw',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({content:`Officer ${badgeNumber} signed off duty.`})
