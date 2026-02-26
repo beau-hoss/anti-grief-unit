@@ -25,7 +25,6 @@
   body{background:var(--navy);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
   body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:999;}
 
-  /* NAVIGATION */
   nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;}
   .nav-logo{font-family:'Oswald';font-size:22px;font-weight:700;letter-spacing:3px;color:#fff;}
   .nav-logo span{color:var(--blue-bright);}
@@ -40,7 +39,6 @@
   .duty-btn.on-duty .duty-indicator{background:var(--red);box-shadow:0 0 6px var(--red);animation:blink 1.2s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-  /* MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;}
   .modal-overlay.active{display:flex;}
   .modal{background:var(--panel);border:1px solid var(--border);border-top:3px solid var(--blue-bright);padding:36px;width:100%;max-width:420px;position:relative;animation:modalIn 0.2s ease;}
@@ -63,7 +61,6 @@
   .modal-status.success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);display:block;}
   .modal-status.error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:var(--red);display:block;}
 
-  /* HERO */
   .hero{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 50% 40%, rgba(29,78,216,0.15) 0%, transparent 65%),linear-gradient(180deg, #000814 0%, var(--navy) 100%);}
   .hero-content{position:relative;z-index:2;padding:40px 20px;}
   .hero-eyebrow{font-family:'Share Tech Mono';font-size:12px;letter-spacing:5px;color:var(--cyan);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;}
@@ -76,31 +73,10 @@
   .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,0.4);}
   .btn-secondary{background:transparent;color:var(--text);font-family:'Oswald';font-size:15px;font-weight:600;letter-spacing:3px;padding:13px 36px;border:1px solid var(--border);cursor:pointer;text-decoration:none;text-transform:uppercase;transition:all 0.2s;display:inline-block;}
   .btn-secondary:hover{border-color:var(--blue-bright);color:var(--blue-bright);}
-
-  /* SECTIONS */
-  section{padding:80px 40px;max-width:1200px;margin:0 auto;}
-  .sec-header{text-align:center;margin-bottom:60px;}
-  .sec-tag{font-family:'Share Tech Mono';font-size:11px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:12px;}
-  .sec-title{font-family:'Oswald';font-size:clamp(28px,4vw,42px);font-weight:700;color:#fff;letter-spacing:2px;}
-  .sec-title span{color:var(--blue-bright);}
-  .sec-line{width:60px;height:2px;background:var(--blue);margin:16px auto 0;}
-  .sec-desc{margin-top:16px;color:var(--muted);font-size:15px;max-width:550px;margin-left:auto;margin-right:auto;line-height:1.7;}
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-  .about-text h2{font-family:'Oswald';font-size:36px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;}
-  .about-text h2 span{color:var(--blue-bright);}
-  .about-text p{color:#94a3b8;font-size:15px;line-height:1.8;margin-bottom:14px;}
-  .about-points{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
-  .about-point{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--blue);padding:12px 16px;}
-  .about-point .icon{font-size:20px;flex-shrink:0;}
-  .about-point p{margin:0;font-size:14px;color:#94a3b8;}
-  .about-point strong{display:block;color:#fff;font-size:15px;margin-bottom:2px;}
-  @media(max-width:900px){nav{padding:0 20px;}.nav-links{display:none;}section{padding:60px 20px;}.about-grid{grid-template-columns:1fr;}}
-  @media(max-width:600px){section{padding:40px 12px;}}
 </style>
 </head>
 <body>
 
-<!-- DUTY MODAL -->
 <div class="modal-overlay" id="dutyModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -125,7 +101,6 @@
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo"><span>LSPD</span></div>
   <div class="nav-links">
@@ -136,7 +111,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">LOS SANTOS POLICE DEPARTMENT</div>
@@ -149,12 +123,19 @@
     </div>
   </div>
 </section>
-<!-- FOOTER -->
+
 <footer style="padding:40px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border);">
   &copy; 2026 LSPD Anti Grief Unit. All rights reserved.
 </footer>
 
 <script>
+  const AUTHORIZED_BADGES = [
+    "1001",
+    "1042",
+    "2077",
+    "3005"
+  ];
+
   let modalSignIn=document.getElementById('modalSignIn');
   let modalSignOut=document.getElementById('modalSignOut');
   let dutyToggleBtn=document.getElementById('dutyToggleBtn');
@@ -168,13 +149,33 @@
 
   function signIn(){
     let input=document.getElementById('badgeInput').value.trim();
-    if(!input){document.getElementById('signInStatus').className='modal-status error';document.getElementById('signInStatus').innerText="Enter a valid badge number.";return;}
+
+    if(!input){
+      document.getElementById('signInStatus').className='modal-status error';
+      document.getElementById('signInStatus').innerText="Enter a valid badge number.";
+      return;
+    }
+
+    if(!AUTHORIZED_BADGES.includes(input)){
+      document.getElementById('signInStatus').className='modal-status error';
+      document.getElementById('signInStatus').innerText="Badge not authorized.";
+      return;
+    }
+
     badgeNumber=input;
-    fetch('https://discord.com/api/webhooks/1471353586960044201/auaaqtBc1W7QnWCqcmqG_UH7YozwRad7XqSSTpiD--2i6XZYNzi_h6jX2qT7JYZfBGlw',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed on duty.`})}).then(res=>{
+
+    fetch('YOUR_WEBHOOK_URL_HERE',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({content:`Officer ${badgeNumber} signed on duty.`})
+    }).then(res=>{
       document.getElementById('signInStatus').className='modal-status success';
       document.getElementById('signInStatus').innerText='Signed on duty!';
-      modalSignIn.style.display='none'; modalSignOut.style.display='block';
-      dutyToggleBtn.classList.add('on-duty'); dutyBtnLabel.innerText='ON DUTY'; dutyIndicator.style.background='var(--red)';
+      modalSignIn.style.display='none'; 
+      modalSignOut.style.display='block';
+      dutyToggleBtn.classList.add('on-duty'); 
+      dutyBtnLabel.innerText='ON DUTY'; 
+      dutyIndicator.style.background='var(--red)';
       onDuty=true;
     }).catch(err=>{
       document.getElementById('signInStatus').className='modal-status error';
@@ -183,10 +184,18 @@
   }
 
   function signOut(){
-    fetch('https://discord.com/api/webhooks/1471353586960044201/auaaqtBc1W7QnWCqcmqG_UH7YozwRad7XqSSTpiD--2i6XZYNzi_h6jX2qT7JYZfBGlw',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:`Officer ${badgeNumber} signed off duty.`})}).then(res=>{
-      modalSignOut.style.display='none'; modalSignIn.style.display='block';
-      dutyToggleBtn.classList.remove('on-duty'); dutyBtnLabel.innerText='SIGN ON DUTY'; dutyIndicator.style.background='var(--green)';
-      badgeNumber=''; onDuty=false;
+    fetch('YOUR_WEBHOOK_URL_HERE',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({content:`Officer ${badgeNumber} signed off duty.`})
+    }).then(res=>{
+      modalSignOut.style.display='none'; 
+      modalSignIn.style.display='block';
+      dutyToggleBtn.classList.remove('on-duty'); 
+      dutyBtnLabel.innerText='SIGN ON DUTY'; 
+      dutyIndicator.style.background='var(--green)';
+      badgeNumber=''; 
+      onDuty=false;
     }).catch(err=>{
       document.getElementById('signOutStatus').className='modal-status error';
       document.getElementById('signOutStatus').innerText='Error notifying dispatch.';
