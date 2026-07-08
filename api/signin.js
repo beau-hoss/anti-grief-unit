@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   if (!badge) return res.status(400).json({ error: 'Badge number required' });
 
   try {
-    const webhookUrl = 'https://discord.com/api/webhooks/1491179416754061443/Wrdy9h4GTIlD7YYYa78wEWAuT1WEk0Jp7WSr-q3J5YBnxX5pVQ5aFIucAoURarhpMUyU';
+    const webhookUrl = 'https://discord.com/api/webhooks/1524332436480065546/b32bf-7jukNoOzQC66-4afYcGLUrygvlHaljhEgHTvDJsSlC12ONHdradBiBUwugxK85';
     const message = {
       content: `🛡️ Officer **#${badge}** has signed ON DUTY.`,
     };
