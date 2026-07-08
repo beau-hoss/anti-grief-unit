@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "No message provided" });
   }
 
-  const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1491179416754061443/Wrdy9h4GTIlD7YYYa78wEWAuT1WEk0Jp7WSr-q3J5YBnxX5pVQ5aFIucAoURarhpMUyU";
+  const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1524332436480065546/b32bf-7jukNoOzQC66-4afYcGLUrygvlHaljhEgHTvDJsSlC12ONHdradBiBUwugxK85";
 
   try {
     const response = await fetch(DISCORD_WEBHOOK, {
